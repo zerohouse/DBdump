@@ -29,8 +29,9 @@ public class Setting {
         if (path == null) {
             path = "{classpath}../../testdata/";
         }
-        if (path.contains("{classpath}"))
-            path = path.replace("{classpath}", getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+        if (path.contains("{classpath}")) {
+            path = path.replace("{classpath}", getClass().getClassLoader().getResource("").getPath());
+        }
         logger.debug("we will export file to {}", path);
         logger.debug("we will import file from {}", path);
         GetValues values;
