@@ -5,7 +5,7 @@
 
     <groupId>org.next</groupId>
     <artifactId>DBdump</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>DBDump For Testdata</name>
@@ -108,7 +108,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifestEntries>
-                            <Application-Version>0.0.2</Application-Version>
+                            <Application-Version>0.0.3</Application-Version>
                             <Built-By>zerohouse</Built-By>
                         </manifestEntries>
                         <addMavenDescriptor>false</addMavenDescriptor>
