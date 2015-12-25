@@ -14,7 +14,7 @@ public class ExportCSVTest {
 
     @Test
     public void exportDBTest() throws Exception {
-        exportCSV = new ExportCSV("C:/ProgramData/MySQL/MySQL Server 5.6/Uploads/");
+        exportCSV = new ExportCSV();
         exportCSV.exe();
     }
 

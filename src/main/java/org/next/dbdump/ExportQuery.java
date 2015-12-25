@@ -1,9 +1,7 @@
 package org.next.dbdump;
 
 import org.next.dbdump.h2.ExportH2;
-import org.next.dbdump.h2.ImportH2;
 import org.next.dbdump.mysql.ExportMysql;
-import org.next.dbdump.mysql.ImportMysql;
 import org.next.dbdump.setting.DBType;
 import org.next.dbdump.setting.Setting;
 

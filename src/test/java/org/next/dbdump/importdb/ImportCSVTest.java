@@ -11,7 +11,7 @@ public class ImportCSVTest {
 
     @Before
     public void setUp() throws Exception {
-        importCSV = new ImportCSV("C:/ProgramData/MySQL/MySQL Server 5.6/Uploads/abc/", true);
+        importCSV = new ImportCSV(true);
     }
 
     @Test

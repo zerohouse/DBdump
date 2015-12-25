@@ -9,11 +9,10 @@ public class ReadProperties {
 
     private Properties properties;
 
-    public ReadProperties() throws IOException {
+    public ReadProperties(String propFileName) throws IOException {
         InputStream inputStream = null;
         try {
             properties = new Properties();
-            String propFileName = "application.properties";
             inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
 
             if (inputStream != null) {

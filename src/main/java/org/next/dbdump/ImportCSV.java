@@ -12,9 +12,9 @@ public class ImportCSV {
     private ImportQuery query;
     private Setting setting;
 
-    public ImportCSV(String path, boolean reset) throws IOException {
+    public ImportCSV(boolean reset) throws IOException {
         setting = new Setting();
-        this.query = ImportQuery.getQuery(setting, path, reset);
+        this.query = ImportQuery.getQuery(setting, setting.getPath(), reset);
     }
 
 

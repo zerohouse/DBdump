@@ -1,6 +1,11 @@
 package org.next.dbdump.setting;
 
 import lombok.Getter;
+import org.next.dbdump.setting.strategy.GetValues;
+import org.next.dbdump.setting.strategy.RawStrategy;
+import org.next.dbdump.setting.strategy.SpringDatasourceStrategy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -13,14 +18,31 @@ public class Setting {
     private String user;
     private String password;
     private String database;
+    private String path;
     private DBType dbType;
 
+    private static final Logger logger = LoggerFactory.getLogger(Setting.class);
+
     public Setting() throws IOException {
-        ReadProperties readProperties = new ReadProperties();
-        this.driver = readProperties.read("spring.datasource.driverClassName");
-        this.url = readProperties.read("spring.datasource.url");
-        this.user = readProperties.read("spring.datasource.username");
-        this.password = readProperties.read("spring.datasource.password");
+        ReadProperties config = new ReadProperties("config.properties");
+        this.path = config.read("dbdump_csvpath");
+        if (path == null) {
+            path = "{classpath}../../testdata/";
+        }
+        if (path.contains("{classpath}"))
+            path = path.replace("{classpath}", getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+        logger.debug("we will export file to {}", path);
+        logger.debug("we will import file from {}", path);
+        GetValues values;
+        if ("raw".equals(config.read("dbdump_strategy"))) {
+            values = new RawStrategy(config);
+        } else {
+            values = new SpringDatasourceStrategy();
+        }
+        this.driver = values.getDriver();
+        this.url = values.getUrl();
+        this.user = values.getUser();
+        this.password = values.getPassword();
         if (this.driver.contains("mysql")) {
             this.dbType = DBType.MYSQL;
             Pattern pattern = Pattern.compile("^jdbc:mysql:\\/\\/(?:.+)\\/([\\w-_$]+)(?:.+)$");
@@ -36,4 +58,5 @@ public class Setting {
                 this.database = matcher.group(1);
         }
     }
+
 }

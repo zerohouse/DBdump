@@ -12,9 +12,9 @@ public class ExportCSV {
     private ExportQuery query;
     private Setting setting;
 
-    public ExportCSV(String path) throws ClassNotFoundException, SQLException, IOException {
+    public ExportCSV() throws ClassNotFoundException, SQLException, IOException {
         setting = new Setting();
-        this.query = ExportQuery.getQuery(setting, path);
+        this.query = ExportQuery.getQuery(setting, setting.getPath());
     }
 
     public List<List<String>> getQueries() throws SQLException, ClassNotFoundException {

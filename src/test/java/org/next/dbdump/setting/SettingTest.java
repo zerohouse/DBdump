@@ -9,6 +9,6 @@ public class SettingTest {
     @Test
     public void testGetDatabase() throws Exception {
         Setting setting = new Setting();
-        setting.getDatabase();
+        System.out.println(setting.getPath());
     }
 }

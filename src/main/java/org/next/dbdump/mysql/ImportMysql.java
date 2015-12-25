@@ -3,6 +3,8 @@ package org.next.dbdump.mysql;
 import lombok.Getter;
 import org.next.dbdump.ImportQuery;
 import org.next.dbdump.setting.FileResolver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,6 +12,9 @@ import java.util.List;
 
 @Getter
 public class ImportMysql implements ImportQuery {
+
+    private static final Logger logger = LoggerFactory.getLogger(ImportMysql.class);
+
     private static final String QUERY = "load data local infile '%s' into table `%s` " +
             " fields terminated by ',' " +
             " enclosed by '\"'" +
@@ -20,6 +25,7 @@ public class ImportMysql implements ImportQuery {
     private boolean reset;
     private List<File> files;
 
+
     public ImportMysql(String path, boolean reset) {
         this.path = path;
         this.reset = reset;
@@ -27,15 +33,15 @@ public class ImportMysql implements ImportQuery {
         this.files = fileResolver.getFiles();
     }
 
-
-
     public List<String> getQueries() {
         List<String> result = new ArrayList<>();
         this.files.forEach(file -> {
             String table = file.getName().substring(0, file.getName().length() - 4);
             if (reset)
                 result.add(String.format(DELETE_QUERY, table));
-            result.add(String.format(QUERY, file.getAbsolutePath().replace("\\", "/"), table, getColumnNames(file)));
+            String path = file.getAbsolutePath().replace("\\", "/");
+            logger.debug("file {} will imported to table {}",path, table);
+            result.add(String.format(QUERY, path, table, getColumnNames(file)));
         });
         return result;
     }

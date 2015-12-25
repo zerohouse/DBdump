@@ -1,16 +1,18 @@
 package org.next.dbdump;
 
-import org.next.dbdump.setting.ReadProperties;
 import org.next.dbdump.setting.Setting;
 
 import java.io.IOException;
-import java.sql.*;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Execute {
 
     private Connection connection;
     private Statement statement;
+
 
     public Execute(Setting setting) throws ClassNotFoundException, SQLException, IOException {
         Class.forName(setting.getDriver());
