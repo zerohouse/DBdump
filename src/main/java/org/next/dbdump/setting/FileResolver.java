@@ -27,9 +27,6 @@ public class FileResolver {
     private List<File> listFilesForFolder(File folder) {
         List<File> result = new ArrayList<>();
         for (final File file : folder.listFiles()) {
-            if (file.isDirectory()) {
-                return listFilesForFolder(file);
-            }
             if (file.getName().endsWith(".csv"))
                 result.add(file);
         }
@@ -37,4 +34,7 @@ public class FileResolver {
     }
 
 
+    public static String getTableNameFromFile(File file) {
+        return file.getName().substring(0, file.getName().length() - 4).toLowerCase();
+    }
 }

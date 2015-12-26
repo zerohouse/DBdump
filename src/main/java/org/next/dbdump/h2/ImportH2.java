@@ -33,7 +33,7 @@ public class ImportH2 implements ImportQuery {
     public List<String> getQueries() {
         List<String> result = new ArrayList<>();
         this.files.forEach(file -> {
-            String table = file.getName().split("\\.")[0];
+            String table = FileResolver.getTableNameFromFile(file);
             if (reset)
                 result.add(String.format(DELETE_QUERY, table));
             logger.debug("file {} will imported to table {}", file.getAbsolutePath(), table);

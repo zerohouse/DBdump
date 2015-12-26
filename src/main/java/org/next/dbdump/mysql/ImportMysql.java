@@ -37,7 +37,7 @@ public class ImportMysql implements ImportQuery {
     public List<String> getQueries() {
         List<String> result = new ArrayList<>();
         this.files.forEach(file -> {
-            String table = file.getName().substring(0, file.getName().length() - 4);
+            String table = FileResolver.getTableNameFromFile(file);
             if (reset)
                 result.add(String.format(DELETE_QUERY, table));
             String path = file.getAbsolutePath().replace("\\", "/");
