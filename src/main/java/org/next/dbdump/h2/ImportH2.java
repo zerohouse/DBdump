@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +25,20 @@ public class ImportH2 implements ImportQuery {
     public ImportH2(String path, boolean reset) {
         this.path = path;
         this.reset = reset;
-        FileResolver fileResolver = new FileResolver(path);
-        this.files = fileResolver.getFiles();
+        FileResolver fileResolver = null;
+        try {
+            fileResolver = new FileResolver(path);
+            this.files = fileResolver.getFiles();
+        } catch (FileNotFoundException e) {
+            logger.error("{} is not directory, nothing to import", path);
+        }
     }
 
     @Override
     public List<String> getQueries() {
         List<String> result = new ArrayList<>();
+        if (this.files == null)
+            return result;
         this.files.forEach(file -> {
             String table = file.getName().split("\\.")[0];
             if (reset)

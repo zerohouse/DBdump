@@ -7,6 +7,7 @@ import org.next.dbdump.setting.Setting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public interface ImportQuery {
@@ -17,7 +18,7 @@ public interface ImportQuery {
 
     Logger logger = LoggerFactory.getLogger(ImportQuery.class);
 
-    static ImportQuery getQuery(Setting setting, String path, boolean reset) {
+    static ImportQuery getQuery(Setting setting, String path, boolean reset) throws FileNotFoundException {
         if (DBType.H2.equals(setting.getDbType())) {
             logger.debug("use h2");
             return new ImportH2(path, reset);

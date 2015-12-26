@@ -29,8 +29,13 @@ public class ImportMysql implements ImportQuery {
     public ImportMysql(String path, boolean reset) {
         this.path = path;
         this.reset = reset;
-        FileResolver fileResolver = new FileResolver(path);
-        this.files = fileResolver.getFiles();
+        FileResolver fileResolver = null;
+        try {
+            fileResolver = new FileResolver(path);
+            this.files = fileResolver.getFiles();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<String> getQueries() {
@@ -40,7 +45,7 @@ public class ImportMysql implements ImportQuery {
             if (reset)
                 result.add(String.format(DELETE_QUERY, table));
             String path = file.getAbsolutePath().replace("\\", "/");
-            logger.debug("file {} will imported to table {}",path, table);
+            logger.debug("file {} will imported to table {}", path, table);
             result.add(String.format(QUERY, path, table, getColumnNames(file)));
         });
         return result;
