@@ -30,12 +30,8 @@ public class ImportMysql implements ImportQuery {
         this.path = path;
         this.reset = reset;
         FileResolver fileResolver = null;
-        try {
-            fileResolver = new FileResolver(path);
-            this.files = fileResolver.getFiles();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        fileResolver = new FileResolver(path);
+        this.files = fileResolver.getFiles();
     }
 
     public List<String> getQueries() {

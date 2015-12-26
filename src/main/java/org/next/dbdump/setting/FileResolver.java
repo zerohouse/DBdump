@@ -1,20 +1,24 @@
 package org.next.dbdump.setting;
 
 import lombok.Getter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 public class FileResolver {
     private List<File> files;
+    private static final Logger logger = LoggerFactory.getLogger(FileResolver.class);
 
-    public FileResolver(String path) throws FileNotFoundException {
+    public FileResolver(String path) {
         File directory = new File(path);
         if (!directory.isDirectory()) {
-            throw new FileNotFoundException(path + " is Not directory");
+            logger.debug("{} is Not Source Directory, Nothing to Import");
+            this.files = new ArrayList<>();
+            return;
         }
         this.files = listFilesForFolder(
                 new File(path));

@@ -20,11 +20,9 @@ public class ExportMysql implements ExportQuery {
     private static final String EXECUTE_STMT = "EXECUTE stmt;";
 
     private String path;
-    private boolean reset;
     private String database;
 
     public ExportMysql(String path, String database) {
-        this.reset = reset;
         this.path = path;
         this.database = database;
     }
