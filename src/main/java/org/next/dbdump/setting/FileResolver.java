@@ -16,7 +16,7 @@ public class FileResolver {
     public FileResolver(String path) {
         File directory = new File(path);
         if (!directory.isDirectory()) {
-            logger.debug("{} is Not Source Directory, Nothing to Import");
+            logger.debug("{} is Not Source Directory, Nothing to Import", path);
             this.files = new ArrayList<>();
             return;
         }
