@@ -18,7 +18,7 @@ public class ImportMysql implements ImportQuery {
     private static final String QUERY = "load data local infile '%s' into table `%s` " +
             " fields terminated by ',' " +
             " enclosed by '\"'" +
-            " lines terminated by '\\r\\n'" +
+            " lines terminated by '" + System.getProperty("line.separator") + "'" +
             " ignore 1 lines (%s);";
     private static final String DELETE_QUERY = "delete from %s";
     private String path;
@@ -33,6 +33,7 @@ public class ImportMysql implements ImportQuery {
         fileResolver = new FileResolver(path);
         this.files = fileResolver.getFiles();
     }
+
 
     public List<String> getQueries() {
         List<String> result = new ArrayList<>();

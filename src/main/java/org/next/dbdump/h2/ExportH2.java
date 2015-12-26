@@ -11,7 +11,7 @@ public class ExportH2 implements ExportQuery {
 
     private static final Logger logger = LoggerFactory.getLogger(ExportH2.class);
 
-    private static final String QUERY = "call CSVWRITE ('%s%s.csv', 'SELECT * FROM %s', 'charset=utf-8')";
+    private static final String QUERY = "call CSVWRITE ('%s%s.csv', 'SELECT * FROM %s', 'charset=UTF-8 fieldDelimiter=\" NULL=NULL')";
     private String path;
 
     public ExportH2(String path) {

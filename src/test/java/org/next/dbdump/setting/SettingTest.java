@@ -11,9 +11,10 @@ public class SettingTest {
 
     @Test
     public void testGetDatabase() throws Exception {
-        Setting setting = new Setting();
-        System.out.println(setting.getPath());
-
-        System.out.println(getClass().getClassLoader().getResource("").getPath());
+//        Setting setting = new Setting();
+//        System.out.println(setting.getPath());
+//
+//        System.out.println(getClass().getClassLoader().getResource("").getPath());
+        System.out.println(System.getProperties().getProperty("line.separator"));
     }
 }
