@@ -46,7 +46,7 @@ public class Setting {
         this.password = values.getPassword();
         if (this.driver.contains("mysql")) {
             this.dbType = DBType.MYSQL;
-            Pattern pattern = Pattern.compile("^jdbc:mysql:\\/\\/(?:.+)\\/([\\w-_$]+)(?:.+)$");
+            Pattern pattern = Pattern.compile("^jdbc:mysql:\\/\\/(?:.+)\\/([\\w-_$]+)(?:.*)$");
             Matcher matcher = pattern.matcher(this.url);
             if (matcher.find())
                 this.database = matcher.group(1);

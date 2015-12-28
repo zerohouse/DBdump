@@ -34,6 +34,7 @@ public class ExportCSV {
     }
 
     public void exe() throws SQLException, ClassNotFoundException {
+        System.out.println(getQueries());
         getQueries().forEach(queries -> {
             Execute execute = null;
             try {
