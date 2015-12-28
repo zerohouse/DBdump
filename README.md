@@ -18,7 +18,7 @@
     <dependency>
         <groupId>org.next</groupId>
         <artifactId>DBdump</artifactId>
-        <version>0.0.4-SNAPSHOT</version>
+        <version>0.0.5-SNAPSHOT</version>
     </dependency>
 
 
